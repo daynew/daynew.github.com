@@ -1,4 +1,30 @@
 body {
-    background-color: #06266f;
+    background-color: #000000;
     color: white;
+}
+div.header {
+    background-color: #1240AB;
+}
+div.body {
+    background-color: #06266f;
+}
+div.content {
+    width: 700px;
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 5px;
+}
+div.centered {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+span.header {
+    font-size: 25pt;
+    padding: 0px;
+}
+
+span.subheader {
+    font-size: 10pt;
+    padding: 0px;
 }
