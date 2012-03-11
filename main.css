@@ -1,6 +1,7 @@
 body {
     background-color: #000000;
     color: white;
+    font-family: "Arial", Helvetica, sans-serif;
 }
 div.header {
     background-color: #1240AB;
@@ -27,4 +28,20 @@ span.header {
 span.subheader {
     font-size: 10pt;
     padding: 0px;
+}
+
+p.post {
+}
+
+a {
+    color: #9FEE00;
+}
+
+code {
+    margin: 5px;
+    padding: 10px;
+    color: #E667AF;
+    display: block;
+    border: 1px solid;
+    border-radius: 5px;
 }
