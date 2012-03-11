@@ -1,19 +1,20 @@
-body {
-    background-color: #000000;
-    color: white;
+html, body {
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    background-color: #313131;
+    color: #f8f8f8;
     font-family: "Arial", Helvetica, sans-serif;
 }
-div.header {
-    background-color: #1240AB;
-}
 div.body {
-    background-color: #06266f;
+    height: 100%;
+    background-color: #464646;
 }
+
 div.content {
+    margin: auto;
     width: 700px;
-    border: 1px solid;
     padding: 10px;
-    border-radius: 5px;
 }
 div.centered {
     margin-left: auto;
@@ -34,14 +35,20 @@ p.post {
 }
 
 a {
-    color: #9FEE00;
+    color: #b3ff6b;
 }
 
 code {
     margin: 5px;
     padding: 10px;
-    color: #E667AF;
+    color: #8ebd62;
+    background-color: #dfffc1;
     display: block;
-    border: 1px solid;
-    border-radius: 5px;
+}
+
+hr {
+    border-top: 5px dotted;
+    border-bottom: 0px;
+    border-left: 0px;
+    border-right: 0px;
 }
