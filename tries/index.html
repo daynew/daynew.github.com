@@ -1,0 +1,101 @@
+<html>
+<head>
+<script type="text/javascript">
+var trie = { isWord : false, letters : {} };
+var log = function(text) {
+	var element = document.getElementById("log");
+    element.innerHTML += "</br></br>" + text;
+};
+
+var createTrie = function() {
+	var requestDictionary = new XMLHttpRequest();
+	requestDictionary.open("GET", "dict", true);
+	requestDictionary.onload = function(e) {
+		log("Downloaded dictionary");
+		processDict(requestDictionary.responseText);
+	};
+	requestDictionary.send();
+};
+
+var processDict = function(dictionaryText) {
+	var dictionary = dictionaryText.split('\n');
+	dictionary.map(addWordToTrie);
+	log("Done processing dictionary");
+};
+
+var addWordToTrie = function(word) {
+	var current = trie;
+	for (var i=0, n=word.length; i<n; i++) {
+		var letter = word.charAt(i);
+		if (current.letters[letter] === undefined) {
+			current.letters[letter] = {};
+			current.letters[letter].letters = {};
+			current.letters[letter].isWord = false;
+		}
+		current = current.letters[letter];
+	}
+	current.isWord = true;
+};
+
+var previousText = "";
+
+var updatePredictions = function(event) {
+	var text = document.getElementById("word").value;
+	if (previousText == text) {
+		return;
+	}
+	previousText = text;
+	if (text.length < 3) {
+		displayPredictions([]);
+		return;
+	}		
+	var predictions = generatePredictions(text);
+	displayPredictions(predictions);
+};
+
+var generatePredictions = function(text) {
+	var current = trie;
+	//traverse through the trie to where our word ends
+	for (var i=0, n=text.length; i<n; i++) {
+		var letter = text.charAt(i);
+		if (current.letters[letter] === undefined) {
+			return [];
+		}
+		current = current.letters[letter];
+	}
+	return generateWords(current, text);
+};
+
+var generateWords = function(currentTrie, word) {
+	var words = [];
+	if (currentTrie === undefined || currentTrie.isWord) {
+		words = [word];
+	}
+	for (var letter in currentTrie.letters) {
+		words = words.concat(generateWords(currentTrie.letters[letter], word+letter));
+	}
+	return words;
+};
+
+var displayPredictions = function(words) {
+	var predictions = document.getElementById("predictions");
+	predictions.innerHTML = "";
+	for (var i=0; i<words.length; i++) {
+		predictions.innerHTML += words[i] + "</br>";
+	}
+};
+</script>
+</head>
+<body>
+<div> Program for predictive text </div>
+<div>
+	<input type="text" id="word" onkeyup="updatePredictions();"/>
+</div>
+<div id="predictions"></div>
+<script type="text/javascript">
+	createTrie();
+</script>
+<div id="log" />
+</body>
+</html>
+
