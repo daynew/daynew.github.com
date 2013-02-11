@@ -1,0 +1,6 @@
+* I was getting 500 errors.  Restarting the server fixed it...
+sudo service nginx restart
+There is also "start" and "stop" options
+
+* The error logs are at: /var/log/nginx/error.log
+
