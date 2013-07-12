@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello world WebRTC App</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="/css/main.css" rel="stylesheet" media="screen">
+        <style>
+            @media screen and (min-width: 640px) {
+                video {
+                    height: 480px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="/">Dayne Wagner</a>
+                    <ul class="nav">
+                        <li><a>Projects</a></li>
+                        <li><a href="https://www.github.com/daynew/">GitHub</a></li>
+                        <li><a>Contact</a></li>
+                        <li><a>R&eacute;sum&eacute;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <h1> Hello RTC! </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span12">
+                    <p>This is my first attempt at trying to use the new WebRTC API's to display the user's video.  I will try to document what everything does in the code.  This hello world application was based on the example <a href="http://simpl.info/getusermedia/">simpl.info/getusermedia</a>.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span12">
+                    <video id="mainVideo" autoplay></video>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <h3>Log</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span12">
+                    <p id="log"></p>
+                </div>
+            </div>
+        </div>
+        <!-- script imports below here -->
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            //WebRTC API's are not standard yet, so grab each platforms implementation of the various apis
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+            //Hash of the audio/video settings
+            var constraints = {audio: false, video:true};
+
+            //Grab the video HTML element defined above
+            var video = $('#mainVideo')[0];
+
+            /**
+             * Function which the getUserMedia function will call if it successfully gains access to the user's video+audio
+             * @param stream The "stream" of video+audio from the User's camera
+             */
+            var successCallback = function(stream) {
+                //Make the stream available to the window
+                //TODO: Get more details about what this does
+                window.stream = stream;
+
+                //TODO: Figure out what the following does
+                if (window.URL) {
+                    video.src = window.URL.createObjectURL(stream);
+                } else {
+                    video.src = stream;
+                }
+
+                //Enable the stream
+                video.play();
+            };
+
+            /**
+             * Function which the getUserMedia function will call if it fails to gain access to the user's video+audio
+             * @param error Details about the error
+             */
+            var errorCallback = function(error) {
+                console.log("navigator.getUserMedia error: ", error);
+                $('#log').append("<p><span class='label label-important'>Error</span> navigator.getUserMedia error: </p><p class='text-error'>" + JSON.stringify(error) + "</p>");
+            };
+
+            navigator.getUserMedia(constraints, successCallback, errorCallback);
+        </script>
+    </body>
+</html>
