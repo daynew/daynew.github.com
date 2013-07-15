@@ -75,14 +75,12 @@
              * @param stream The "stream" of video+audio from the User's camera
              */
             var successCallback = function(stream) {
-                //Make the stream available to the window
-                //TODO: Get more details about what this does
-                window.stream = stream;
-
-                //TODO: Figure out what the following does
                 if (window.URL) {
+                    //window.URL.createObjectURL creates a temporary URL for the given "blob" of binary data.  The stream object is used to get the raw
+                    //bits being output in the stream, so we need to create a URL for it so we can set the "src" attribute of our video tag.
                     video.src = window.URL.createObjectURL(stream);
                 } else {
+                    //If the browser doesn't have a way to create a URL for the stream, then hopefully the stream objects already just a URL.
                     video.src = stream;
                 }
 
