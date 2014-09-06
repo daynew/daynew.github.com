@@ -1,47 +1,46 @@
-<!DOCTYPE html>
+<!doctype HTML>
 <html>
     <head>
-        <title>Dayne Wagner's Portal</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Bootstrap -->
-        <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="css/main.css" rel="stylesheet" media="screen">
+        <title>Dayne Wagner</title>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="jquery.fittext.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <style>
+            body {
+                background: #000000;
+                color: #151515;
+                font-family: 'Open Sans', sans-serif;
+            }
+            .container {
+                display: inline-block;
+                width: 100%;
+                text-align: center;
+            }
+            .outer {
+                display: table;
+                position: absolute;
+                height: 100%;
+                width: 100%;
+            }
+
+            .middle {
+                display: table-cell;
+                vertical-align: middle;
+            }
+        </style>
     </head>
+
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
+        <div class="outer">
+            <div class="middle">
                 <div class="container">
-                    <a class="brand" href="/">Dayne Wagner</a>
-                    <ul class="nav">
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="https://www.github.com/daynew/">GitHub</a></li>
-                        <li><a href="/contact.html">Contact</a></li>
-                        <li><a href="/resume.html">R&eacute;sum&eacute;</a></li>
-                    </ul>
+                    Dayne Wagner
                 </div>
             </div>
         </div>
-        <div class="container">
-            <h1>Welcome! :) </h1>
-            <div class="row">
-                <div class="span12">
-                    <p>I'm a software developer living in Seattle.  I'm interested in making new things and helping my community.</p>
-                </div>
-            </div>
-            <!-- start update sections -->
-            <h2>Updates</h2>
-            <div class="media">
-                <a href="/webrtc/helloWebRtc.html" class="pull-left">
-                    <img class="media-object" src="/img/webrtc.jpg" />
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading">Hello WebRTC</h4>
-                    July 2013 - Hello World program using the WebRTC.  This project simply displays the user's webcam feed.
-                </div>
-            </div>
-        </div>
-        <!-- script imports below here -->
-        <script src="http://code.jquery.com/jquery.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <script>
+            jQuery(".container").fitText();
+        </script>
     </body>
 </html>
